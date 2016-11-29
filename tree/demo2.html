@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title></title>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/vuex.js"></script>
+</head>
+<body>
+<div id="app">
+    <counter></counter>
+</div>
+<script>
+var aa = new Vuex.Store({
+  state: {
+    count: 0
+  },
+  mutations: {
+    increment:function(state) {
+      state.count++;
+    }
+  }
+})
+
+// 创建一个计数器组件
+var Counter = {
+  template: `<div><div>{{ count }}</div><button @click="add">add</button></div>`,
+  computed: {
+    count:function () {
+      return this.$store.state.count
+    }
+  },
+  methods:{
+    add:function(){
+        this.$store.commit('increment');
+    }
+  }
+}
+
+var app = new Vue({
+  el: '#app',
+  store:aa,
+  components: { Counter }
+})
+
+</script>
+</body>
+</html>

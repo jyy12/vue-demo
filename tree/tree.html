@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title></title>
+    <script src="../lib/vue.js"></script>
+    <style type="text/css">
+    ul{list-style: none;}
+    .switch{cursor: pointer;}
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <ul>
+        <tree-item v-for="item in treeData" :model="item"></tree-item>
+    </ul>
+</div>
+
+<script type="text/x-template" id="treeItem">
+    <li>
+        <div class="title">
+            <span class="switch" @click="showChildren">{{text}}</span>
+            <span class="name">{{model.value}}</span>
+        </div>
+        <ul v-show="open" v-if="isFolder">
+            <tree-item v-for="item in model.children" :model="item"></tree-item>
+        </ul>
+    </li>
+</script>
+
+
+<script>
+Vue.component('tree-item',{
+    template:'#treeItem',
+    props:{
+        model:Object
+    },
+    data:function(){
+        return {
+            open:false
+        }
+    },
+    computed:{
+        text:function(){
+            var text='-';
+            if(typeof(this.model.children)!='undefined' && this.model.children.length>0 && !this.open){
+                text='+';
+            }
+            return text;
+        },
+        isFolder:function(){
+            if(typeof(this.model.children)!='undefined' && this.model.children.length>0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    },
+    methods:{
+        showChildren:function(){
+            this.open=!this.open
+        }
+
+    }
+})
+
+var vm=new Vue({
+    el:'#app',
+    data:{
+        treeData:[
+            {id:1,value:'标题一'},
+            {id:2,value:'标题一',
+                children:[
+                    {id:7,value:'标题一'},
+                    {id:8,value:'标题一'},
+                    {id:9,value:'标题一',
+                        children:[
+                            {id:11,value:'标题一',
+                                children:[
+                                    {id:20,value:'标题一'}
+                                ]
+                            },
+                            {id:15,value:'标题一'}
+                        ]
+                    },
+                    {id:10,value:'标题一'}
+                ]
+            },
+            {id:3,value:'标题一'},
+            {id:4,value:'标题一',
+                children:[
+                    {id:17,value:'标题一'}
+                ]
+            },
+            {id:5,value:'标题一'},
+            {id:6,value:'标题一'}
+        ]
+    }
+})
+</script>
+</body>
+</html>
