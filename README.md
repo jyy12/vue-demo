@@ -1,14 +1,14 @@
 # vue-demo
 
-> Vue.js demos
+> demos used by vue.js、vue-cli、vuex、vue-router
 
 
 
-# company-website
+## company-website
 a company website demo use by vue-cli
 npm install
 npm run dev
 
 
-# tree
+## tree
 tree check model use by vue+vuex
