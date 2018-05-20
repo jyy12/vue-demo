@@ -2,7 +2,7 @@
   "name": "web-demo",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "jyy12 <jyy12@qq.com>",
+  "author": "niniun1024 <niniun1024@qq.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
